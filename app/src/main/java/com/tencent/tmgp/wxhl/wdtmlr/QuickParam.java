@@ -1,4 +1,6 @@
 package com.tencent.tmgp.wxhl.wdtmlr;
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.quicksdk.entity.GameRoleInfo;
@@ -9,6 +11,7 @@ public class QuickParam {
     public static GameRoleInfo getRoleInfo(String jsonStr) throws JSONException {
         GameRoleInfo g=new GameRoleInfo();
         JsonObject obj= JsonParser.parseString(jsonStr).getAsJsonObject();
+        Log.d("debug>>>",obj.get("serverID").getAsString());
         g.setServerID(obj.get("serverID").getAsString());//数字字符串，不能含有中文字符
         g.setServerName(obj.get("serverName").getAsString());
         g.setGameRoleName(obj.get("gameRoleName").getAsString());

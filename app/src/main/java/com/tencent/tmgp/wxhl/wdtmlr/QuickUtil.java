@@ -28,14 +28,15 @@ import com.quicksdk.notifier.LogoutNotifier;
 import com.quicksdk.notifier.PayNotifier;
 import com.quicksdk.notifier.SwitchAccountNotifier;
 public class QuickUtil {
-    private static String productCode="XXX";
-    private static String productKey="XXX";
-    private static String callback_Key="XXX";
-    private static String md5_Key="XXX";
+    private static String productCode="18197424520563423737014184078839";
+    private static String productKey="74959194";
+    private static String callback_Key="49012436174289374443382022513568";
+    private static String md5_Key="sgykakqm1szqoxzeq4xktqn84mhrruhj";
     private static boolean autoLogin=true;//默认登录失败后自动重新登录一次
     private static Activity act;
     private static IQuickListener iql;
     private static GameRoleInfo rinfo;
+    private static boolean isReport=false;
     private static boolean isInit=false;
     public static void create(Activity _act, IQuickListener _iql){
         act=_act;
@@ -158,12 +159,14 @@ public class QuickUtil {
         try{
             rinfo= QuickParam.getRoleInfo(jsonStr);
             User.getInstance().setGameRoleInfo(act, rinfo, newRole);
+            isReport=true;
         }catch(Exception err){
             iql.reportFailed("参数错误:"+err.getMessage());
         }
     }
     public static void toPay(String jsonStr){
         try{
+            if(!isReport)reportUserinfo(jsonStr,false);
             OrderInfo oinfo= QuickParam.getOrderInfo(jsonStr);
             Payment.getInstance().pay(act,oinfo,rinfo);
         }catch(Exception err){

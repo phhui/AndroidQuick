@@ -5,6 +5,7 @@ import android.webkit.WebSettings;
 public class WebSettingUtil {
     public static void setEgret(WebSettings ws){
         ws.setJavaScriptEnabled(true);  //支持js
+        ws.setPluginState(WebSettings.PluginState.ON);
         ws.setJavaScriptCanOpenWindowsAutomatically(true);// 设置允许JS弹窗
         ws.setUseWideViewPort(false);  //将图片调整到适合webview的大小
 //        ws.setSupportZoom(true);  //支持缩放
@@ -13,6 +14,9 @@ public class WebSettingUtil {
         ws.setDomStorageEnabled(true);//开启本地缓存功能
 //        ws.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);  //关闭webview中缓存
         ws.setAllowFileAccess(true);  //设置可以访问文件
+        ws.setAllowContentAccess(true);
+        ws.setAllowFileAccessFromFileURLs(true);
+        ws.setAllowUniversalAccessFromFileURLs(true);
 //        ws.setNeedInitialFocus(true); //当webview调用requestFocus时为webview设置节点
 //        ws.setBuiltInZoomControls(true); //设置支持缩放
         ws.setLoadWithOverviewMode(true); // 缩放至屏幕的大小

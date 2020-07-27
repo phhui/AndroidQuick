@@ -1,10 +1,12 @@
 package com.tencent.tmgp.wxhl.wdtmlr;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.widget.FrameLayout;
@@ -21,10 +23,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         QuickUtil.create(MainActivity.this,iquickListener);
         view=(FrameLayout)this.getWindow().getDecorView();
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
     }
     @Override
     public void onResume() {
+        if(getRequestedOrientation()== ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         super.onResume();
         com.quicksdk.Sdk.getInstance().onResume(this);
     }
