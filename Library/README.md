@@ -1,0 +1,3 @@
+- 1、打开 Terminal 面板，执行 gradlew makeJar
+- 2、build/libs/ 下会生成 pq.jar
+- 3、引用pq.jar
